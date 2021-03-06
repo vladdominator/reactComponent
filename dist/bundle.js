@@ -1,0 +1,1 @@
+(()=>{var __webpack_modules__={10:()=>{eval("console.log('App is working');\r\ndocument.querySelector('h1').textContent = 'Vlad'\n\n//# sourceURL=webpack:///./index.js?")}},__webpack_exports__={};__webpack_modules__[10]()})();
