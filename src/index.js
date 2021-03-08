@@ -1,2 +1,6 @@
-console.log('App is working');
-document.querySelector('h1').textContent = 'Vlad'
+import { appModule } from "./app/app.module";
+import { bootstrap } from "./framework/index";
+import {wfm} from './framework/index'
+wfm.delay().then(() => {
+   bootstrap(appModule);
+})
