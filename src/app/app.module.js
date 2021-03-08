@@ -1,4 +1,4 @@
-import { WFMModule } from "../framework/index";
+import { WFMModule } from "framework";
 import { appComponent } from "./app.component";
 import { appRoutes } from "./app.routes";
 import { appHeader } from "./common/app.header";

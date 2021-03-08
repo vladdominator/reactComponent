@@ -1,12 +1,12 @@
 import {Module as WFMModule} from './core/module';
-import {Component as WFMComponent} from './core/component';
-import {bootstrap} from './core/bootsrap';
-import {wfm} from './tools/util';
-import {router} from './tools/router';
+import {Component as WFMComponent} from './core/component/component';
+import {bootstrap} from './core/functions/bootsrap';
+import { _ } from './tools/util';
+import {router} from './core/routing/router';
 export{
    WFMModule,
    WFMComponent,
    bootstrap,
-   wfm,
+   _,
    router
 }
