@@ -1,4 +1,5 @@
 import { WFMComponent } from "framework";
+import {$} from '../../framework/tools/dom'
 
 class TabsPageComponent extends WFMComponent{
    constructor(config){
@@ -10,9 +11,11 @@ class TabsPageComponent extends WFMComponent{
       }
    }
    onTabClick({target}){
-      if(!target.classList.contains('collapsible-header')) return
-      this.el.querySelectorAll('.js-tab').forEach(e => e.classList.remove('active'))
-      target.parentNode.classList.add('active')
+      let $target = $(target)
+    if (!$target.hasClass('collapsible-header')) return
+
+    this.el.findAll('.js-tab').forEach(e => e.removeClass('active'))
+    $target.parent().addClass('active')
    }
 }
 export const tabsPageComponent = new TabsPageComponent({
@@ -20,7 +23,7 @@ export const tabsPageComponent = new TabsPageComponent({
    template: `
    <div class = "row">
    <div class = "col s6 offset-s3">
-   <ul class="collapsible popout collapsible-accordion" style = "margin-top:30px;">
+   <ul class="collapsible popout collapsible-accordion">
    <li class="active js-tab">
      <div class="collapsible-header">
        <i class="material-icons">filter_drama</i>First</div>
@@ -51,5 +54,13 @@ export const tabsPageComponent = new TabsPageComponent({
  </ul>
    </div>
    </div>
+   `,
+   styles:`
+   .collapsible-accordion{
+      margin-top:30px;
+   }
+   .collapsible li.active .collapsible-body{
+      display: block;
+   }
    `
 })

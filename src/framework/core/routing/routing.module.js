@@ -1,10 +1,12 @@
 import { _ } from '../../tools/util'
 import { router } from './router'
+import { $ } from '../../tools/dom'
 import {renderComponent} from '../component/render-component'
 
 export class RoutingModule{
-   constructor(routes){
+   constructor(routes, dispatcher){
       this.routes = routes
+      this.dispatcher = dispatcher
    }
    init(){
       window.addEventListener('hashchange', renderRoute.bind(this))
@@ -17,6 +19,7 @@ function renderRoute(){
       if(_.isUndefined(route)){
          route = this.routes.find(r => r.path === '**')
       }
-      document.querySelector('router-outlet').innerHTML = `<${route.component.selector}></${route.component.selector}>`;
+      $('router-outlet').html(`<${route.component.selector}></${route.component.selector}>`);
       renderComponent(route.component)
+      this.dispatcher.emit('routing.change-page')
 }

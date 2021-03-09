@@ -1,27 +1,22 @@
-import { renderComponent } from "./component/render-component"
-import { _ } from '../tools/util'
-import { RoutingModule } from './routing/routing.module'
+import { initRouting } from './routing/init-routing'
+import { initComponents } from './component/init-components'
+import { initDirectives } from './directives/init-directives'
+import { EventEmitter } from '../tools/event-emitter'
 
 export class Module{
    constructor(config){ 
       this.components = config.components
       this.bootstrapComponent = config.bootstrap
       this.routes = config.routes
-
+      this.directives = config.directives
+      this.dispatcher = new EventEmitter()
    }
    start(){
       initComponents(this.bootstrapComponent, this.components)
-      initRouting(this.routes)
+      initRouting(this.routes, this.dispatcher)
+      initDirectives(this.directives)
+      this.dispatcher.on('routing.change-page', () => {
+         initDirectives(this.directives)
+      })
    }
-}
-function initComponents(bootstrap, components){
-   if(_.isUndefined(bootstrap)){
-      throw new Error("Bootstrap component is not defined")
-   }
-   [bootstrap, ...components].forEach(renderComponent)
-}
-function initRouting(routes){
-   if(_.isUndefined(routes)) return
-   let routing = new RoutingModule(routes);
-   routing.init()
 }
