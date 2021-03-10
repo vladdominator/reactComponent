@@ -38,7 +38,13 @@ function compileTemplate(template, data){
    let regex = /\{{(.*?)}}/g 
    template = template.replace(regex, (str, d) => {
       let key = d.trim()
-      return data[key]
+      let pipe;
+      if(hasPipe(key)){
+         key = getKeyFromPipe(key)
+         pipe = parsePipe(key)
+      }
+      if(_.isUndefined(pipe)) return data[key]
+      return applyPipe(pipe, data[key])
    })
    return template
 }
@@ -47,4 +53,10 @@ function initStyles(styles){
 
   let style = $(document.createElement('style')).html(styles)
   $(document.head).append(style)
+}
+function hasPipe(key){
+   return key.includes('|')
+}
+function getKeyFromPipe(key){
+   return key.split('|')[0].trim()
 }

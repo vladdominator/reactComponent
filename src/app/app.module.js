@@ -18,5 +18,8 @@ export const appModule = new AppModule({
    routes: appRoutes,
    directives:[
       appHoverDirective
+   ],
+   pipes: [
+      
    ]
 })
