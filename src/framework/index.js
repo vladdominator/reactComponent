@@ -7,6 +7,8 @@ import { _ } from './tools/util';
 import { $ } from './tools/dom';
 import { EventEmitter } from './tools/event-emitter';
 import {router} from './core/routing/router';
+import {http} from './tools/http'
+
 export{
    WFMModule,
    WFMComponent,
@@ -16,5 +18,6 @@ export{
    bootstrap,
    _,
    router,
-   $
+   $,
+   http
 }

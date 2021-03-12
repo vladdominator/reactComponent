@@ -1,17 +1,27 @@
-import { WFMComponent, router } from "framework";
+import { WFMComponent, router, http, _ } from "framework";
 class HomePageComponent extends WFMComponent{
    constructor(config){
       super(config)
 
       this.data = {
          title: 'Главная страница работает!!!',
-         linkTitle: 'Перейти на другую страницу'
+         linkTitle: 'Перейти на другую страницу',
+         ip: 'Loading...'
       }
    }
    events(){
       return{
          'click .js-link': 'goToTabs'
       }
+   }
+   afterInit(){
+      http.get('https://api.ipify.org/?format=json')
+      .then(({ip}) =>{
+         _.delay(2000).then(() => {
+            this.data.ip = ip
+            this.render()
+         })
+      })
    }
    goToTabs(){
       event.preventDefault()
@@ -26,7 +36,7 @@ export const homePageComponent = new HomePageComponent({
      <div class="card blue-grey darken-1">
        <div class="card-content white-text">
          <span class="card-title">{{ title }}</span>
-         <p>Пока тут нету никакого функционала</p>
+         <p>{{ ip }}</p>
        </div>
        <div class="card-action">
          <a href="#not-exists-link" class = "js-link">{{ linkTitle }}</a>
