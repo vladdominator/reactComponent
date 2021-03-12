@@ -1,5 +1,7 @@
 import {_} from '../../tools/util'
 import {$} from '../../tools/dom'
+import {parsePipe} from '../pipes/parse-pipe'
+import {applyPipe} from '../pipes/apply-pipe'
 
 export class Component{
    constructor(config){
@@ -40,8 +42,8 @@ function compileTemplate(template, data){
       let key = d.trim()
       let pipe;
       if(hasPipe(key)){
-         key = getKeyFromPipe(key)
          pipe = parsePipe(key)
+         key = getKeyFromPipe(key)
       }
       if(_.isUndefined(pipe)) return data[key]
       return applyPipe(pipe, data[key])

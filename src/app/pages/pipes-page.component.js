@@ -14,6 +14,8 @@ export const pipePageComponent = new PipePageComponent({
    <div class="col s6 offset-s3 pipe__block">
       <h4>{{ number }}</h4>
       <h4>{{ number | multi }}</h4>
+      <h4>{{ number | multi:5 }}</h4>
+      <h4>{{ number | multi:5:4 }}</h4>
    </div>
  </div>
    `,
